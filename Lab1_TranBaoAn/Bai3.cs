@@ -33,7 +33,7 @@ namespace Lab1_TranBaoAn
         public static string NumberToText(int inputNumber, bool suffix = true)
         {
             string[] unitNumbers = new string[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
-            string[] placeValues = new string[] { "", "nghìn", "triệu", "tỷ" };
+            string[] placeValues = new string[] { "", "nghìn ", "triệu", "tỷ" };
             bool isNegative = false;
 
             string sNumber = inputNumber.ToString();
@@ -45,12 +45,15 @@ namespace Lab1_TranBaoAn
                 isNegative = true;
             }
 
+            string result = " ";
+
+            if (inputNumber == 0) result = "không";
 
             int ones, tens, hundreds;
 
             int positionDigit = sNumber.Length;  
 
-            string result = " ";
+           
 
 
             if (positionDigit == 0)
@@ -128,19 +131,7 @@ namespace Lab1_TranBaoAn
             {
                 if (number1 >= 0 && number1 <= 9)
                 {
-                    switch (number1)
-                    {
-                        case 0: textBox3.Text = "không"; break;
-                        case 1: textBox3.Text = "một"; break;
-                        case 2: textBox3.Text = "hai"; break;
-                        case 3: textBox3.Text = "ba"; break;
-                        case 4: textBox3.Text = "bốn"; break;
-                        case 5: textBox3.Text = "năm"; break;
-                        case 6: textBox3.Text = "sáu"; break;
-                        case 7: textBox3.Text = "bảy"; break;
-                        case 8: textBox3.Text = "tám"; break;
-                        case 9: textBox3.Text = "chín"; break;
-                    }   
+                    textBox3.Text = NumberToText(number1);
                 }
                 else
                 {

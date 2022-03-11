@@ -100,28 +100,34 @@ namespace Lab1_TranBaoAn
             int number1, count = 0;
             bool success1 = int.TryParse(a, out number1);
 
-            if (comboBox1.Text == "Binary" || comboBox2.Text == "Binary")
+            if (comboBox1.Text == "Binary" )
             {
                 foreach(var i in a)
                 {
-                    if (i != '0' || i != '1') return false;
+                    if (i != '0' && i != '1') return false;
                 }
                 return true;
             }
 
-            if (comboBox1.Text == "Hexadecimal" || comboBox2.Text == "Hexadecimal")
+            if (comboBox1.Text == "Hexadecimal" )
             {
-                for (var i = 0; i < a.Length; i++)
+                string test = "";
+                count = 0;
+                string validChars = "abcdefABCDEF";
+                
+                for (int i=0;i<a.Length;i++)
                 {
-                    if (success1 || i == 'A' || i == 'a' || i == 'B' || i == 'b' || i == 'C' || i == 'c'
-                        || i == 'D' || i == 'd' || i == 'E' || i == 'e' || i == 'F' || i == 'f') count++;
+                    if (validChars.Contains(a[i])==false && int.TryParse(a[i].ToString(),out count)==false) return false;
                 }
+                return true;
+                MessageBox.Show($"{count}  {a.Length} {test}");
                 if (count == a.Length) return true;
                 return false;
             }
 
-            if (comboBox1.Text == "Decimal" || comboBox2.Text == "Decimal")
+            if (comboBox1.Text == "Decimal" )
             {
+                
                 if (success1) return true;
                 return false;
             }
