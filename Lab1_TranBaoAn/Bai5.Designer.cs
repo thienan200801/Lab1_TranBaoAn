@@ -46,6 +46,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.ScoreList = new System.Windows.Forms.FlowLayoutPanel();
             this.Clear = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -204,11 +205,21 @@
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(50, 132);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(205, 20);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "(Cách nhau bởi khoảng trắng)";
+            // 
             // Bai5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 566);
+            this.Controls.Add(this.label15);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.ScoreList);
             this.Controls.Add(this.label14);
@@ -254,5 +265,6 @@
         private Label label14;
         private FlowLayoutPanel ScoreList;
         private Button Clear;
+        private Label label15;
     }
 }

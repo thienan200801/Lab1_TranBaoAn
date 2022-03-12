@@ -20,6 +20,7 @@ namespace Lab1_TranBaoAn
         private void Clear_Click(object sender, EventArgs e)
         {
             textBox1.Text = "";
+            textBox2.Text = "";
             comboBox1.Text = "";
             comboBox2.Text = "";
         }
@@ -29,166 +30,49 @@ namespace Lab1_TranBaoAn
             Application.Exit();
         }
 
-        public static String DecToBin(int n)
+        public int ConvertBoxType(string box)
         {
-            string result = "";
-            int[] binaryNum = new int[32];
-
-            int i = 0;
-            while (n > 0)
-            {
-                binaryNum[i] = n % 2;
-                n = n / 2;
-                i++;
-            }
-
-            for (int j = i - 1; j >= 0; j--)
-                result += (binaryNum[j]);
-            return result;
+            if (box == "Binary") return 2;
+            else if (box == "Hexadecimal") return 16;
+            else if (box == "Decimal") return 10;
+            return 0;
         }
 
-        public static String BinToDec(int n)
-        {
-            string result = "";
-            int num = n;
-            int dec_value = 0;
-
-            int base1 = 1;
-
-            int temp = num;
-            while (temp > 0)
-            {
-                int last_digit = temp % 10;
-                temp = temp / 10;
-
-                dec_value += last_digit * base1;
-
-                base1 = base1 * 2;
-            }
-
-            return dec_value.ToString();
-        }
-
-        public string HexToBin(string hexvalue)
-        {
-            return Convert.ToString(Convert.ToInt32(hexvalue, 16), 2);
-        }
-
-        public static string BinToHex(string binary)
-        {
-            if (string.IsNullOrEmpty(binary))
-                return binary;
-
-            StringBuilder result = new StringBuilder(binary.Length / 8 + 1);
-
-            int mod4Len = binary.Length % 8;
-            if (mod4Len != 0)
-            {
-                binary = binary.PadLeft(((binary.Length / 8) + 1) * 8, '0');
-            }
-
-            for (int i = 0; i < binary.Length; i += 8)
-            {
-                string eightBits = binary.Substring(i, 8);
-                result.AppendFormat("{0:X2}", Convert.ToByte(eightBits, 2));
-            }
-
-            return result.ToString();
-        }
-        public bool checkInput (string a)
-        {
-            int number1, count = 0;
-            bool success1 = int.TryParse(a, out number1);
-
-            if (comboBox1.Text == "Binary" )
-            {
-                foreach(var i in a)
-                {
-                    if (i != '0' && i != '1') return false;
-                }
-                return true;
-            }
-
-            if (comboBox1.Text == "Hexadecimal" )
-            {
-                string test = "";
-                count = 0;
-                string validChars = "abcdefABCDEF";
-                
-                for (int i=0;i<a.Length;i++)
-                {
-                    if (validChars.Contains(a[i])==false && int.TryParse(a[i].ToString(),out count)==false) return false;
-                }
-                return true;
-                MessageBox.Show($"{count}  {a.Length} {test}");
-                if (count == a.Length) return true;
-                return false;
-            }
-
-            if (comboBox1.Text == "Decimal" )
-            {
-                
-                if (success1) return true;
-                return false;
-            }
-            return true;
-        }
         private void Execute_Click(object sender, EventArgs e)
         {
-            string input1;
+            int box1, box2;
+            string stringInput;
 
-            input1 = textBox1.Text;
+            stringInput = textBox1.Text.Trim();
+            box1 = ConvertBoxType(comboBox1.Text.Trim());
+            box2 = ConvertBoxType(comboBox2.Text.Trim());
 
-            int number1;
+            if (box1 == 0) box2 = 0;
 
-            bool success1 = int.TryParse(input1, out number1);
-
-            if (!checkInput(input1))
+            try
             {
-                MessageBox.Show("Nhập dữ liệu sai định dạng");
-                return;
-            }
-
-            if (comboBox1.Text == "Hexadecimal" && comboBox2.Text == "Binary")
-            {
-                textBox2.Text = HexToBin(input1);
-            }
-            if (comboBox1.Text == "Binary" && comboBox2.Text == "Hexadecimal")
-            {
-                textBox2.Text = BinToHex(input1);
-            }
-
-            if (comboBox1.Text == "Hexadecimal" && comboBox2.Text == "Decimal")
-            {
-                string tmp = HexToBin(input1);
-                textBox2.Text = BinToDec(Int32.Parse(tmp));
-            }
-
-            if (comboBox1.Text == "Decimal" && comboBox2.Text == "Hexadecimal")
-            {
-                if (success1)
+                if (box1 == 2)
                 {
-                    string tmp = DecToBin(number1);
-                    textBox2.Text = BinToHex(tmp);
+                    int Bin2Dec = Convert.ToInt32(stringInput, 2);
+                    if (box2 == 10) textBox2.Text = Bin2Dec.ToString();
+                    else if (box2 == 16) textBox2.Text = Convert.ToString(Bin2Dec, box2);
+                    else textBox2.Text = stringInput;
+                }
+                else if (box1 == 16)
+                {
+                    int Hex2Dec = Convert.ToInt32(stringInput, 16);
+                    if (box2 == 10) textBox2.Text = Convert.ToString(Hex2Dec, box2);
+                    else if (box2 == 2) textBox2.Text = Convert.ToString(Hex2Dec, box2);
+                    else textBox2.Text = stringInput;
+                }
+                else if (box1 == 10)
+                {
+                    textBox2.Text = Convert.ToString(int.Parse(stringInput), box2);
                 }
             }
-            if(comboBox1.Text == "Decimal" && comboBox2.Text == "Binary")
+            catch
             {
-                if (success1)
-                {
-                    textBox2.Text = DecToBin(number1);
-                }
-                else
-                {
-                    MessageBox.Show("Nhập dữ liệu sai định dạng");
-                }
-            }
-            if (comboBox1.Text == "Binary" && comboBox2.Text == "Decimal")
-            {
-                if (success1)
-                {
-                    textBox2.Text = BinToDec(number1);
-                }
+                MessageBox.Show("Dữ liệu không hợp lệ");
             }
         }
     }

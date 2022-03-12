@@ -33,7 +33,7 @@ namespace Lab1_TranBaoAn
         public static string NumberToText(int inputNumber, bool suffix = true)
         {
             string[] unitNumbers = new string[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
-            string[] placeValues = new string[] { "", "nghìn ", "triệu", "tỷ" };
+            string[] placeValues = new string[] { "", "nghìn ", "triệu ", "tỷ " };
             bool isNegative = false;
 
             string sNumber = inputNumber.ToString();
@@ -145,22 +145,26 @@ namespace Lab1_TranBaoAn
         }
         private void ReadAdvanced_Click(object sender, EventArgs e)
         {
-            string input2;
-
-            input2 = textBox2.Text;
-
-            int number2;
-
-            bool success2 = int.TryParse(input2, out number2);
-
-            // Read number advanced
-            if (success2)
+            try
             {
-                textBox4.Text =  NumberToText(number2);
+                string input2;
+
+                input2 = textBox2.Text;
+
+                int number2;
+
+                bool success2 = int.TryParse(input2, out number2);
+
+                // Read number advanced
+                if (success2)
+                {
+                    textBox4.Text = NumberToText(number2);
+                }
+                else MessageBox.Show("Dữ liệu đầu vào sai định dạng");
             }
-            else
+            catch
             {
-                MessageBox.Show("Vui lòng nhập số nguyên");
+                MessageBox.Show("Dữ liệu đầu vào sai định dạng");
             }
         }
     }

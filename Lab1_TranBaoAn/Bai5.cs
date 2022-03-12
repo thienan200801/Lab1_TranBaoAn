@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Lab1_TranBaoAn
 {
@@ -154,7 +155,12 @@ namespace Lab1_TranBaoAn
             try
             {
                 ScoreList.Controls.Clear();
-                string s = textBox1.Text;
+                string rawString = textBox1.Text;
+                string s = rawString.Trim(' ');
+                RegexOptions options = RegexOptions.None;
+                Regex regex = new Regex("[ ]{2,}", options);
+                s = regex.Replace(s, " ");
+                //MessageBox.Show(s);
 
                 string[] subs = s.Split(' ');
                 float[] fsubs;
@@ -192,6 +198,17 @@ namespace Lab1_TranBaoAn
             ScoreList.Controls.Clear();
             textBox1.Text = "";
             ScoreList.ResetText();
+            label6.Text = "";
+
+            label8.Text = "";
+
+            label10.Text = "";
+
+            label7.Text = "";
+
+            label9.Text = "";
+
+            label11.Text = "";
         }
     }
 }

@@ -31,12 +31,12 @@ namespace Lab1_TranBaoAn
             textBox5.Text = "";
         }
 
-        public long MinFunc(long a, long b)
+        public double MinFunc(double a, double b)
         {
             return a < b ? a : b;
         }
 
-        public long MaxFunc(long a, long b)
+        public double MaxFunc(double a, double b)
         {
             return (a > b) ? a : b;
         }
@@ -49,11 +49,11 @@ namespace Lab1_TranBaoAn
             num2 = textBox2.Text;
             num3 = textBox3.Text;
 
-            long number1, number2, number3;
+            double number1, number2, number3;
 
-            bool success1 = long.TryParse(num1, out number1);
-            bool success2 = long.TryParse(num2, out number2);
-            bool success3 = long.TryParse(num3, out number3);
+            bool success1 = double.TryParse(num1, out number1);
+            bool success2 = double.TryParse(num2, out number2);
+            bool success3 = double.TryParse(num3, out number3);
 
             if (success1 && success2 && success3)
             {

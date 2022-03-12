@@ -36,6 +36,8 @@ namespace Lab1_TranBaoAn
             else 
             {
                 MessageBox.Show("Vui lòng nhập số nguyên");
+                textBox3.Text = "error";
+                return;
             }
             textBox3.Text = sum.ToString();
         }

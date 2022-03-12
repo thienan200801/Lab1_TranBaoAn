@@ -33,14 +33,6 @@ namespace Lab1_TranBaoAn
 
         private void Bai5_Click(object sender, EventArgs e)
         {
-            try
-            {
-
-            }
-            catch
-            {
-                MessageBox.Show("ditme");
-            }
             new Bai5().ShowDialog();
             this.Hide();
 
